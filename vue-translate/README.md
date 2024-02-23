@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+Hello probando,
+Hola 12
+=======
 # vue-translate
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -27,3 +31,4 @@ npm run dev
 ```sh
 npm run build
 ```
+>>>>>>> 369b221503290faa74c7c9c9fb6668c4809190fa
