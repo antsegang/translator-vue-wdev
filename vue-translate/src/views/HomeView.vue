@@ -3,5 +3,6 @@
 
 <template>
   <main>
+    hola desde home
   </main>
 </template>
