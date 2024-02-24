@@ -1,1 +1,19 @@
 @import './base.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0d0d0d;
+    background-image:  linear-gradient(30deg, #3affb8 12%, transparent 12.5%, transparent 87%, #3affb8 87.5%, #3affb8), linear-gradient(150deg, #3affb8 12%, transparent 12.5%, transparent 87%, #3affb8 87.5%, #3affb8), linear-gradient(30deg, #3affb8 12%, transparent 12.5%, transparent 87%, #3affb8 87.5%, #3affb8), linear-gradient(150deg, #3affb8 12%, transparent 12.5%, transparent 87%, #3affb8 87.5%, #3affb8), linear-gradient(60deg, #3affb877 25%, transparent 25.5%, transparent 75%, #3affb877 75%, #3affb877), linear-gradient(60deg, #3affb877 25%, transparent 25.5%, transparent 75%, #3affb877 75%, #3affb877);
+    background-size: 34px 60px;
+    background-position: 0 0, 0 0, 17px 30px, 17px 30px, 0 0, 17px 30px;
+    color: white;
+    background-attachment: fixed;
+    text-shadow: #0d0d0d 2px 2px 2px;
+}
+
