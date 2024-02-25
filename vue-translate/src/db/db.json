@@ -1,0 +1,20 @@
+{
+    "users": [
+        {
+            "id": "0",
+            "name": "Samantha",
+            "lastname": "Calvo",
+            "username": "Sam",
+            "email": "scalvoz@vlacademy.com",
+            "password": "12092006"
+        },
+        {
+            "id": "1",
+            "name": "Anthony",
+            "lastname": "Segura",
+            "username": "Thony",
+            "email": "",
+            "password": "123456789"
+        }
+    ]
+}

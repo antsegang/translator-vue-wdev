@@ -8,8 +8,8 @@ import { RouterLink, RouterView } from 'vue-router'
       <img src="../assets/logo.png" class="logo" alt="logo">
 
       <nav>
-        <ul>
-          <li>
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
             <RouterLink to="/">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house"
                 viewBox="0 0 16 16">
@@ -20,7 +20,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </RouterLink>
           </li>
 
-          <li>
+          <li class="nav-item">
             <RouterLink to="/about">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle"
                 viewBox="0 0 16 16">
@@ -32,7 +32,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </RouterLink>
           </li>
 
-          <li>
+          <li class="nav-item">
             <RouterLink to="/translate">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-translate"
                 viewBox="0 0 16 16">
@@ -45,7 +45,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </RouterLink>
           </li>
 
-          <li>
+          <li class="nav-item">
             <RouterLink to="/user">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
                 viewBox="0 0 16 16">
@@ -79,6 +79,7 @@ header {
   background: #55d6aa;
   box-shadow: #4e4c4c 0px 0px 10px 0px;
   text-shadow: none;
+  padding: 10px 0;
 }
 
 header::after {
@@ -91,6 +92,7 @@ header::after {
   float: left;
   padding: 10px 0;
   width: 50px;
+  height: auto;
 }
 
 nav {
@@ -137,5 +139,11 @@ nav a::before {
 
 nav a:hover::before {
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  nav ul.nav {
+    margin-left: auto !important;
+  }
 }
 </style>
