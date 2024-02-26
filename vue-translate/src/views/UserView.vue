@@ -9,9 +9,15 @@
                         </div>
                         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt=""
                             class="profile-photo mb-0 ">
-                        <h3 class="mt-3">{{ name }}</h3>
+                        <h3 class="">{{ name }}</h3>
                         <h3>{{ username }}</h3>
                         <h3>{{ mail }}</h3>
+                        <div class="d-grid gap-2">
+                            <RouterLink to="/edit_user" type="button" name="" id="" class="btn btn-primary mt-5 ">
+                                Editar Perfil
+                            </RouterLink>
+                        </div>
+
                     </template>
                 </cardComponent>
             </div>
@@ -21,10 +27,12 @@
 </template>
 
 <script setup>
-let name = 'John Doe';
-let username = 'johndoe';
-let mail = 'johndoe@mail.com';
+let session = JSON.parse(localStorage.getItem('session'));
+let name = `${session.fullname}`;
+let username = `${session.userName}`;
+let mail = `${session.email}`;
 import cardComponent from '../components/cardComponent.vue';
+import localStorage from '../services/localStorageService';
 </script>
 
 <style scoped>

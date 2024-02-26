@@ -1,6 +1,9 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import localStorage from '../services/localStorageService';
+let session = localStorage.getItem('session');
+let esLogin = localStorage.getItem('esLogin');
 </script>
 <template>
   <header class="sticky-top">
@@ -45,7 +48,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </RouterLink>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" v-if="esLogin === 'true' && session !== 'null'">
             <RouterLink to="/user">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
                 viewBox="0 0 16 16">
