@@ -1,10 +1,9 @@
 import apiConfig from "./apiConfig";
 import controllers from "./controllers";
 import sessionServices from "./sessionServices.js";
+import localStorage from "./localStorageService.js";
 
-const login = async () => {
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
+const login = async (email, password) => {
   const response = await apiConfig().get(controllers.users); //respuesta del api
   const users = response.data;
 
@@ -13,31 +12,38 @@ const login = async () => {
     (x) => x.email === email && x.password === password
   );
   if (user.length > 0) {
-    let esLogin = user !== null && user.length > 0;
-    let fullname = `${user[0].name} ${user[0].lastname}`;
-    let userName = `${user[0].username}`;
-    let email = `${user[0].email}`;
-    sessionServices.createSession(esLogin, fullname, userName, email);
+    const esLogin = user !== null && user.length > 0;
+    const id = `${user[0].id}`;
+    const name = `${user[0].name}`;
+    const lastname = `${user[0].lastname}`;
+    const userName = `${user[0].username}`;
+    const email = `${user[0].email}`;
+    sessionServices.createSession(esLogin, id, name, lastname, userName, email);
   } else if (user.length === 0) {
-    console.log("Datos incorrectos");
+    alert("Datos incorrectos");
   }
   return;
 };
 
-const register = async () => {
-  let name = document.getElementById("name").value;
-  let lastname = document.getElementById("lastname").value;
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-  let username = document.getElementById("username").value;
+const register = async (name, lastname, username, email, password) => {
+  if (
+    name === "" ||
+    lastname === "" ||
+    username === "" ||
+    email === "" ||
+    password === ""
+  ) {
+    return {
+      esRegistroExitoso: false,
+      mensaje: "Todos los campos son requeridos",
+    };
+  }
   const response = await apiConfig().get(controllers.users);
   const users = response.data;
-
   // Verificar si el usuario ya existe
   const existingUser = users.filter(
     (x) => x.email === email || x.username === username
   );
-
   if (existingUser.length > 0) {
     return {
       esRegistroExitoso: false,
@@ -53,13 +59,8 @@ const register = async () => {
       username,
     };
 
-    // Agregar el nuevo usuario al array de usuarios
-    users.push(newUser);
-
     // Actualizar la lista de usuarios en el servidor
-    await apiConfig().put(controllers.users, { users });
-
-    alert("Registro exitoso");
+    await apiConfig().post(controllers.users, newUser);
 
     return {
       esRegistroExitoso: true,

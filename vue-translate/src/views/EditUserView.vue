@@ -15,6 +15,11 @@
                                 aria-describedby="helpId" />
                         </div>
                         <div class="mb-3">
+                            <label for="lastname" class="form-label">Apellidos</label>
+                            <input type="text" v-model="lastname" class="form-control" name="lastname" id="lastname"
+                                aria-describedby="helpId" />
+                        </div>
+                        <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" v-model="username" class="form-control" name="username" id="username"
                                 aria-describedby="helpId" />
@@ -42,10 +47,11 @@
 </template>
 
 <script setup>
-let session = JSON.parse(localStorage.getItem('session'));
-let name = ref(`${session.fullname}`);
-let username = ref(`${session.userName}`);
-let mail = ref(`${session.email}`);
+const session = JSON.parse(localStorage.getItem('session'));
+const name = ref(`${session.name}`);
+const lastname = ref(`${session.lastname}`);
+const username = ref(`${session.userName}`);
+const mail = ref(`${session.email}`);
 import cardComponent from '../components/cardComponent.vue';
 import localStorage from '../services/localStorageService';
 import { ref } from 'vue';

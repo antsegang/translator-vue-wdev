@@ -27,10 +27,10 @@
 </template>
 
 <script setup>
-let session = JSON.parse(localStorage.getItem('session'));
-let name = `${session.fullname}`;
-let username = `${session.userName}`;
-let mail = `${session.email}`;
+const session = JSON.parse(localStorage.getItem('session'));
+const name = `${session.name}  ${session.lastname}`;
+const username = `${session.userName}`;
+const mail = `${session.email}`;
 import cardComponent from '../components/cardComponent.vue';
 import localStorage from '../services/localStorageService';
 </script>
