@@ -71,14 +71,14 @@ const register = async (name, lastname, username, email, password) => {
   }
 };
 
-const editUser = async (id, name, lastname, email, password, username) => {
+const editUser = async (id, name, lastname, username, email) => {
   const response = await apiConfig().get(controllers.users);
   const users = response.data;
 
   // Verificar si el usuario existe
-  const user = users.find((x) => x.id === id);
+  const user = users.filter((x) => x.id === id);
 
-  if (!user) {
+  if (user.length === 0) {
     return {
       esEdicionExitosa: false,
       mensaje: "No se encontró el usuario",
@@ -88,12 +88,12 @@ const editUser = async (id, name, lastname, email, password, username) => {
   // Actualizar la información del usuario
   user.name = name;
   user.lastname = lastname;
-  user.email = email;
-  user.password = password;
   user.username = username;
+  user.email = email;
+
 
   // Actualizar la lista de usuarios en el servidor
-  await apiConfig().put(controllers.users, { users });
+  await apiConfig().put(`${controllers.users}/${id}`, { users });
 
   return {
     esEdicionExitosa: true,

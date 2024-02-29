@@ -4,9 +4,17 @@ import { RouterLink, RouterView } from 'vue-router'
 import localStorage from '../services/localStorageService';
 let session = localStorage.getItem('session');
 let esLogin = localStorage.getItem('esLogin');
+
+const logOut = () => {
+  localStorage.removeItem('session');
+  localStorage.removeItem('esLogin');
+  location.href = "/"
+}
 </script>
+
+
 <template>
-  <header class="sticky-top">
+  <header class="sticky-top" v-if="esLogin === 'true' && session !== 'null'">
     <div class="container">
       <img src="../assets/logo.png" class="logo" alt="logo">
 
@@ -58,6 +66,15 @@ let esLogin = localStorage.getItem('esLogin');
               User
             </RouterLink>
           </li>
+          <li class="nav-item" v-if="esLogin === 'true' && session !== 'null'">
+            <button class="btn" @click="logOut">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
+                  <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
+                  <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117M11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5M4 1.934V15h6V1.077z"/>
+              </svg>
+              Log out
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -68,6 +85,12 @@ let esLogin = localStorage.getItem('esLogin');
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 li {
+  margin: 0;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 800;
+}
+
+button {
   margin: 0;
   font-family: 'Work Sans', sans-serif;
   font-weight: 800;
@@ -123,7 +146,18 @@ nav a {
   font-size: 14px;
 }
 
+nav button {
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
 nav a:hover {
+  color: #000;
+}
+
+nav button:hover {
   color: #000;
 }
 
@@ -140,11 +174,28 @@ nav a::before {
   transition: all ease-in-out 250ms;
 }
 
+nav button::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
 nav a:hover::before {
   width: 100%;
 }
 
-@media (max-width: 768px) {
+nav button:hover::before {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
   nav ul.nav {
     margin-left: auto !important;
   }

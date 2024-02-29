@@ -31,7 +31,7 @@
                         </div>
                         <div class="d-grid gap-2">
                             <div class="d-grid gap-2">
-                                <button type="button" name="" id="" class="btn btn-primary">
+                                <button type="button" name="" id="" class="btn btn-primary" @click="edit">
                                     Guardar
                                 </button>
                             </div>
@@ -50,11 +50,24 @@
 const session = JSON.parse(localStorage.getItem('session'));
 const name = ref(`${session.name}`);
 const lastname = ref(`${session.lastname}`);
-const username = ref(`${session.userName}`);
+const username = ref(`${session.username}`);
 const mail = ref(`${session.email}`);
+const id = ref(`${session.id}`);
 import cardComponent from '../components/cardComponent.vue';
 import localStorage from '../services/localStorageService';
+import userServices from '@/services/userServices';
 import { ref } from 'vue';
+
+const edit = async () => {
+    const response = await userServices.editUser(id.value, name.value, lastname.value, username.value, mail.value);
+
+    if (response.esEdicionExitosa === true) {
+        alert(response.mensaje);
+        location.href = '/user';
+    }else{
+        alert(response.mensaje);
+    }
+}
 </script>
 
 <style scoped>
