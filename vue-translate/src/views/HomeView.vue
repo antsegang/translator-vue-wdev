@@ -97,6 +97,7 @@ const lpassword = ref("")
 
 const login = async () => {
   await userServices.login(lemail.value, lpassword.value);
+  location.href = "/user";
 };
 
 const register = async () => {

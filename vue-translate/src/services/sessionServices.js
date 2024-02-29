@@ -18,7 +18,6 @@ const createSession = (esLogin, id, name, lastname, userName, email) => {
   localStorage.setItem("esLogin", esLogin);
   localStorage.setItem("session", JSON.stringify(session));
   localStorage.removeItem("Hform");
-  location.href = "/user";
 };
 
 const destroySession = () => {

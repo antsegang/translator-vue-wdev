@@ -1,59 +1,17 @@
 {
   "users": [
     {
-      "users": [
-        {
-          "users": [
-            {
-              "id": "0",
-              "name": "Samantha",
-              "lastname": "Calvo",
-              "username": "Sam",
-              "email": "scalvoz@vlacademy.com",
-              "password": "12092006"
-            },
-            {
-              "id": "1",
-              "name": "Anthony",
-              "lastname": "Segura",
-              "username": "Thony",
-              "email": "anthonybsegura@vlacademy.com",
-              "password": "12012000"
-            },
-            {
-              "id": "f095",
-              "name": "Anthony Bernal",
-              "lastname": "Segura Angulo",
-              "email": "absegura12@gmail.com",
-              "password": "12012000",
-              "username": "bitzels"
-            }
-          ],
-          "id": "0"
-        },
-        {
-          "id": "1",
-          "name": "Anthony",
-          "lastname": "Segura",
-          "username": "Thony",
-          "email": "anthonybsegura@vlacademy.com",
-          "password": "12012000"
-        },
-        {
-          "id": "f095",
-          "name": "Anthony Bernal",
-          "lastname": "Segura Angulo",
-          "email": "absegura12@gmail.com",
-          "password": "12012000",
-          "username": "bitzels"
-        }
-      ],
-      "id": "0"
+      "id": "0",
+      "name": "Samantha",
+      "lastname": "Calvo",
+      "username": "Sam",
+      "email": "scalvoz@vlacademy.com",
+      "password": "12092006"
     },
     {
       "id": "1",
-      "name": "Anthony",
-      "lastname": "Segura",
+      "name": "Anthony Bernal",
+      "lastname": "Segura Angulo",
       "username": "Thony",
       "email": "anthonybsegura@vlacademy.com",
       "password": "12012000"
@@ -61,10 +19,10 @@
     {
       "id": "f095",
       "name": "Anthony Bernal",
-      "lastname": "Segura Angulo",
-      "email": "absegura12@gmail.com",
       "password": "12012000",
-      "username": "bitzels"
+      "lastname": "Segura Angulo",
+      "username": "bitzels",
+      "email": "absegura12@gmail.com"
     }
   ]
 }

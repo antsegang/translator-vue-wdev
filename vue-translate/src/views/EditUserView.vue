@@ -12,22 +12,22 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" v-model="name" class="form-control" name="name" id="name"
-                                aria-describedby="helpId" />
+                                aria-describedby="helpId" :placeholder="pName" />
                         </div>
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Apellidos</label>
                             <input type="text" v-model="lastname" class="form-control" name="lastname" id="lastname"
-                                aria-describedby="helpId" />
+                                aria-describedby="helpId" :placeholder="pLastname" />
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" v-model="username" class="form-control" name="username" id="username"
-                                aria-describedby="helpId" />
+                                aria-describedby="helpId" :placeholder="pUsername" />
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo</label>
                             <input type="email" v-model="mail" class="form-control" name="email" id="email"
-                                aria-describedby="helpId" />
+                                aria-describedby="helpId" :placeholder="pMail" />
                         </div>
                         <div class="d-grid gap-2">
                             <div class="d-grid gap-2">
@@ -48,11 +48,16 @@
 
 <script setup>
 const session = JSON.parse(localStorage.getItem('session'));
-const name = ref(`${session.name}`);
-const lastname = ref(`${session.lastname}`);
-const username = ref(`${session.username}`);
-const mail = ref(`${session.email}`);
+const name = ref('');
+const lastname = ref('');
+const username = ref('');
+const mail = ref('');
 const id = ref(`${session.id}`);
+const pName = `${session.name}`;
+const pLastname = `${session.lastname}`;
+const pUsername = `${session.userName}`;
+const pMail = `${session.email}`;
+
 import cardComponent from '../components/cardComponent.vue';
 import localStorage from '../services/localStorageService';
 import userServices from '@/services/userServices';
@@ -63,8 +68,8 @@ const edit = async () => {
 
     if (response.esEdicionExitosa === true) {
         alert(response.mensaje);
-        location.href = '/user';
-    }else{
+        location.href = "/user";
+    } else {
         alert(response.mensaje);
     }
 }

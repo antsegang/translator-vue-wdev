@@ -74,6 +74,10 @@ const register = async (name, lastname, username, email, password) => {
 const editUser = async (id, name, lastname, username, email) => {
   const response = await apiConfig().get(controllers.users);
   const users = response.data;
+  const session = JSON.parse(localStorage.getItem("session"));
+  const esLogin = localStorage.getItem("esLogin");
+
+  console.log(session);
 
   // Verificar si el usuario existe
   const user = users.filter((x) => x.id === id);
@@ -86,20 +90,28 @@ const editUser = async (id, name, lastname, username, email) => {
   }
 
   // Actualizar la información del usuario
-  user.name = name;
-  user.lastname = lastname;
-  user.username = username;
-  user.email = email;
-
+  user[0].name = name === "" ? session.name : name;
+  user[0].lastname = lastname === "" ? session.lastname : lastname;
+  user[0].username = username === "" ? session.userName : username;
+  user[0].email = email === "" ? session.email : email;
 
   // Actualizar la lista de usuarios en el servidor
-  await apiConfig().put(`${controllers.users}/${id}`, { users });
+  await apiConfig().put(`${controllers.users}/${id}`, user[0]);
+
+  sessionServices.createSession(
+    esLogin,
+    id,
+    user[0].name,
+    user[0].lastname,
+    user[0].username,
+    user[0].email
+  );
 
   return {
     esEdicionExitosa: true,
     mensaje: "Edición exitosa",
     fullname: `${user.name} ${user.lastname}`,
-    userName: `${user.username}`,
+    userName: `${user.userame}`,
   };
 };
 
