@@ -1,4 +1,5 @@
 <template>
+    {{ textSource }}
     <div class="container mt-5 ">
         <div class="row justify-content-center align-items-center g-2 text-center">
             <div class="col-md-6 col-12 ">
@@ -6,14 +7,15 @@
                     <template #content>
                         <div class="mb-3">
                             <label for="" class="form-label"></label>
-                            <textarea class="form-control bg-transparent " name="traducir" id="traducir"
-                                rows="5"></textarea>
+                            <textarea v-model="textSource" class="form-control bg-transparent " name="traducir"
+                                id="traducir" rows="5"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
-                            <selectComponent defaultOption="Selecciona un idioma">
+                            <selectComponent :method="changeLenguageSource" defaultOption="Selecciona un idioma">
                                 <template #opts>
-                                    <option id="opts">
+                                    <option v-for="language in arrayLenguages">
+                                        {{ language.language }}
                                     </option>
                                 </template>
                             </selectComponent>
@@ -32,9 +34,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
-                            <selectComponent defaultOption="Selecciona un idioma">
+                            <selectComponent :method="changeLenguageTarget" defaultOption="Selecciona un idioma">
                                 <template #opts>
-                                    <option id="opts">
+                                    <option v-for="language in arrayLenguages">
+                                        {{ language.language }}
                                     </option>
                                 </template>
                             </selectComponent>
@@ -50,4 +53,42 @@
 <script setup>
 import cardComponent from '../components/cardComponent.vue';
 import selectComponent from '../components/selectComponent.vue';
+import translateServices from '../services/translateServices';
+import { onMounted, ref } from 'vue';
+
+const textSource = ref('');
+const target = ref('en');
+const source = ref('es');
+const arrayLenguages = ref([]);
+
+const getLenguages = async () => {
+    const response = await translateServices.getLenguages();
+    arrayLenguages.value = response.data.data.languages;
+    console.log(arrayLenguages.value);
+};
+
+const detectLenguage = async () => {
+    const response = await translateServices.detectLenguage(textSource.value);
+    console.log(response);
+};
+
+const translate = async () => {
+    const response = await translateServices.translate(textSource.value, source.value, target.value);
+    console.log(response);
+};
+
+const changeLenguageSource = (event) => {
+    source.value = event.target.value;
+};
+
+const changeLenguageTarget = (event) => {
+    target.value = event.target.value;
+};
+
+onMounted(() => {
+    // detectLenguage();
+    // translate();
+    // getLenguages();
+});
+
 </script>

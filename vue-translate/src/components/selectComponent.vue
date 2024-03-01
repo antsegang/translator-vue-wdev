@@ -1,5 +1,5 @@
 <template>
-    <select class="form-select form-select-lg bg-transparent " name="" id="">
+    <select @change="(e) => method(e)" class="form-select form-select-lg bg-transparent " name="" id="">
         <option selected>{{ defaultOption }}</option>
         <slot name="opts">
 
@@ -11,6 +11,10 @@
 defineProps({
     defaultOption: {
         type: String
+    },
+    method: {
+        type: Object,
+        required: true
     }
 })
 </script>
