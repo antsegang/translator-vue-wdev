@@ -72,46 +72,41 @@ const register = async (name, lastname, username, email, password) => {
 };
 
 const editUser = async (id, name, lastname, username, email) => {
-  const response = await apiConfig().get(controllers.users);
-  const users = response.data;
+  const response = await apiConfig().get(`${controllers.users}/${id}`);
+  const user = response.data;
   const session = JSON.parse(localStorage.getItem("session"));
   const esLogin = localStorage.getItem("esLogin");
 
-  console.log(session);
+  // Verificar si hay cambios en los datos del usuario
+  const eName = name === "" ? user.name : name;
+  const eLastname = lastname === "" ? user.lastname : lastname;
+  const eUserName = username === "" ? session.userName : username;
+  const eEmail = email === "" ? session.email : email;
 
-  // Verificar si el usuario existe
-  const user = users.filter((x) => x.id === id);
-
-  if (user.length === 0) {
-    return {
-      esEdicionExitosa: false,
-      mensaje: "No se encontró el usuario",
-    };
-  }
-
-  // Actualizar la información del usuario
-  user[0].name = name === "" ? session.name : name;
-  user[0].lastname = lastname === "" ? session.lastname : lastname;
-  user[0].username = username === "" ? session.userName : username;
-  user[0].email = email === "" ? session.email : email;
+  // Crear una copia del usuario con los datos actualizados
+  const eUser = {
+    ...user,
+    name: eName,
+    lastname: eLastname,
+    userName: eUserName,
+    email: eEmail,
+  };
 
   // Actualizar la lista de usuarios en el servidor
-  await apiConfig().put(`${controllers.users}/${id}`, user[0]);
+  await apiConfig().put(`${controllers.users}/${id}`, eUser);
 
   sessionServices.createSession(
     esLogin,
     id,
-    user[0].name,
-    user[0].lastname,
-    user[0].username,
-    user[0].email
+    eUser.name,
+    eUser.lastname,
+    eUser.userName,
+    eUser.email
   );
 
   return {
     esEdicionExitosa: true,
     mensaje: "Edición exitosa",
-    fullname: `${user.name} ${user.lastname}`,
-    userName: `${user.userame}`,
   };
 };
 
