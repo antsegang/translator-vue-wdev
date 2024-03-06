@@ -1,36 +1,23 @@
 <template>
-    {{ textSource }}
     <div class="container mt-5 ">
         <div class="row justify-content-center align-items-center g-2 text-center">
             <div class="col-md-6 col-12 ">
                 <cardComponent title="Entrada">
                     <template #content>
-                        <button 
-                            v-if="miIdioma != ''" 
-                            class="btn btn-success" 
-                            @click="setSource()">
+                        <button v-if="miIdioma != ''" class="btn btn-success" @click="setSource()">
                             ¿Estás escribiendo en {{ miIdioma }}?
                         </button>
                         <div class="mb-3">
                             <label for="" class="form-label"></label>
-                            <textarea 
-                            @change="detectLenguage()" 
-                            v-model="textSource" 
-                            class="form-control bg-transparent " 
-                            name="traducir"
-                            id="traducir" 
-                            rows="5"></textarea>
+                            <textarea @change="detectLenguage()" v-model="textSource"
+                                class="form-control bg-transparent " name="traducir" id="traducir" rows="5"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
-                            <selectComponent 
-                            :method="changeLenguageSource" 
-                            defaultOption="Selecciona un idioma" 
-                            :idioma="miIdioma === '' ? 'Selecciona un idioma' : source">
+                            <selectComponent :method="changeLenguageSource" defaultOption="Selecciona un idioma"
+                                :idioma="miIdioma === '' ? 'Selecciona un idioma' : source">
                                 <template #opts>
-                                    <option 
-                                    :value="language.language" 
-                                    v-for="language in arrayLenguages">
+                                    <option :value="language.language" v-for="language in arrayLenguages">
                                         {{ language.language }}
                                     </option>
                                 </template>
@@ -42,11 +29,12 @@
             </div>
             <div class="col-md-6 col-12 ">
                 <cardComponent title="Resultado">
+
                     <template #content>
                         <div class="mb-3">
                             <label for="" class="form-label"></label>
-                            <textarea class="form-control bg-transparent" name="resultado" id="resultado"
-                                rows="5" readonly></textarea>
+                            <textarea class="form-control bg-transparent" name="resultado" id="resultado" rows="5"
+                                readonly></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
@@ -62,7 +50,7 @@
                 </cardComponent>
             </div>
         </div>
-
+        <div class="row mt-5"><button class="btn btn-success shadow-lg" @click="translate()">Translate</button></div>
     </div>
 </template>
 
@@ -70,7 +58,7 @@
 import cardComponent from '../components/cardComponent.vue';
 import selectComponent from '../components/selectComponent.vue';
 import translateServices from '../services/translateServices';
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 
 const textSource = ref('');
 const target = ref('en');
@@ -90,7 +78,7 @@ const detectLenguage = async () => {
     const idioma = detections[0].language;
     miIdioma.value = idioma
     console.log(response);
-    console.log (idioma);
+    console.log(idioma);
 };
 
 const translate = async () => {
@@ -115,10 +103,11 @@ const setSource = () => {
     }
 }
 
+
 onMounted(() => {
     // detectLenguage();
-    // translate();
-    // getLenguages();
+    //translate();
+    getLenguages();
 });
 
 </script>
