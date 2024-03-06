@@ -6,7 +6,7 @@ const getLenguages = () => {
     url: "https://google-translate1.p.rapidapi.com/language/translate/v2/languages",
     headers: {
       "Accept-Encoding": "application/gzip",
-      "X-RapidAPI-Key": "e207ba4c28mshe3aac50e9faa2f4p1668b0jsne1abac797e33",
+      "X-RapidAPI-Key": "668da33512msh8306010d76b59bfp1fd423jsn08af87f15a51",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
     },
   };
@@ -30,7 +30,7 @@ const detectLenguage = (text) => {
     headers: {
       "content-type": "application/x-www-form-urlencoded",
       "Accept-Encoding": "application/gzip",
-      "X-RapidAPI-Key": "e207ba4c28mshe3aac50e9faa2f4p1668b0jsne1abac797e33",
+      "X-RapidAPI-Key": "668da33512msh8306010d76b59bfp1fd423jsn08af87f15a51",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
     },
     data: encodedParams,
@@ -57,7 +57,7 @@ const translate = (text, target, source) => {
     headers: {
       "content-type": "application/x-www-form-urlencoded",
       "Accept-Encoding": "application/gzip",
-      "X-RapidAPI-Key": "e207ba4c28mshe3aac50e9faa2f4p1668b0jsne1abac797e33",
+      "X-RapidAPI-Key": "668da33512msh8306010d76b59bfp1fd423jsn08af87f15a51",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
     },
     data: encodedParams,
