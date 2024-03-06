@@ -5,16 +5,22 @@
             <div class="col-md-6 col-12 ">
                 <cardComponent title="Entrada">
                     <template #content>
+                        <button 
+                            v-if="miIdioma != ''" 
+                            class="btn btn-success" 
+                            @click="setSource()">
+                            ¿Estás escribiendo en {{ miIdioma }}?
+                        </button>
                         <div class="mb-3">
                             <label for="" class="form-label"></label>
-                            <textarea v-model="textSource" class="form-control bg-transparent " name="traducir"
+                            <textarea @change="detectLenguage()" v-model="textSource" class="form-control bg-transparent " name="traducir"
                                 id="traducir" rows="5"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
                             <selectComponent :method="changeLenguageSource" defaultOption="Selecciona un idioma">
                                 <template #opts>
-                                    <option v-for="language in arrayLenguages">
+                                    <option :value="language.language" v-for="language in arrayLenguages">
                                         {{ language.language }}
                                     </option>
                                 </template>
@@ -60,6 +66,7 @@ const textSource = ref('');
 const target = ref('en');
 const source = ref('es');
 const arrayLenguages = ref([]);
+const miIdioma = ref('')
 
 const getLenguages = async () => {
     const response = await translateServices.getLenguages();
@@ -69,7 +76,11 @@ const getLenguages = async () => {
 
 const detectLenguage = async () => {
     const response = await translateServices.detectLenguage(textSource.value);
+    const detections = response.data.data.detections[0];
+    const idioma = detections[0].language;
+    miIdioma.value = idioma
     console.log(response);
+    console.log (idioma);
 };
 
 const translate = async () => {
@@ -84,6 +95,11 @@ const changeLenguageSource = (event) => {
 const changeLenguageTarget = (event) => {
     target.value = event.target.value;
 };
+
+const setSource = () => {
+    source.value = miIdioma.value
+
+}
 
 onMounted(() => {
     // detectLenguage();
