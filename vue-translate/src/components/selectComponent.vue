@@ -1,19 +1,25 @@
 <template>
-    <select @change="(e) => method(e)" class="form-select form-select-lg bg-transparent " name="" id="">
+    <select @change="(e) => method(e)" :value="idioma" class="form-select form-select-lg bg-transparent " name="" id="">
         <option selected>{{ defaultOption }}</option>
         <slot name="opts">
 
         </slot>
-
     </select>
 </template>
+
 <script setup>
-defineProps({
+import { defineProps, defineEmits } from 'vue';
+
+const props = defineProps({
     defaultOption: {
         type: String
     },
     method: {
-        type: Object,
+        type: Function,
+        required: true
+    },
+    idioma: {
+        type: String,
         required: true
     }
 })

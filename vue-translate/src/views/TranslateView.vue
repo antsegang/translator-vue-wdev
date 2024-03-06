@@ -13,14 +13,24 @@
                         </button>
                         <div class="mb-3">
                             <label for="" class="form-label"></label>
-                            <textarea @change="detectLenguage()" v-model="textSource" class="form-control bg-transparent " name="traducir"
-                                id="traducir" rows="5"></textarea>
+                            <textarea 
+                            @change="detectLenguage()" 
+                            v-model="textSource" 
+                            class="form-control bg-transparent " 
+                            name="traducir"
+                            id="traducir" 
+                            rows="5"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
-                            <selectComponent :method="changeLenguageSource" defaultOption="Selecciona un idioma">
+                            <selectComponent 
+                            :method="changeLenguageSource" 
+                            defaultOption="Selecciona un idioma" 
+                            :idioma="miIdioma === '' ? 'Selecciona un idioma' : source">
                                 <template #opts>
-                                    <option :value="language.language" v-for="language in arrayLenguages">
+                                    <option 
+                                    :value="language.language" 
+                                    v-for="language in arrayLenguages">
                                         {{ language.language }}
                                     </option>
                                 </template>
@@ -36,11 +46,11 @@
                         <div class="mb-3">
                             <label for="" class="form-label"></label>
                             <textarea class="form-control bg-transparent" name="resultado" id="resultado"
-                                rows="5"></textarea>
+                                rows="5" readonly></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
-                            <selectComponent :method="changeLenguageTarget" defaultOption="Selecciona un idioma">
+                            <selectComponent :method="changeLenguageTarget" :idioma="target">
                                 <template #opts>
                                     <option v-for="language in arrayLenguages">
                                         {{ language.language }}
@@ -66,7 +76,7 @@ const textSource = ref('');
 const target = ref('en');
 const source = ref('es');
 const arrayLenguages = ref([]);
-const miIdioma = ref('')
+const miIdioma = ref('');
 
 const getLenguages = async () => {
     const response = await translateServices.getLenguages();
@@ -97,8 +107,12 @@ const changeLenguageTarget = (event) => {
 };
 
 const setSource = () => {
-    source.value = miIdioma.value
-
+    if (miIdioma.value !== '') {
+        source.value = miIdioma.value;
+        console.log('Idioma de origen cambiado a:', source.value);
+    } else {
+        console.log('El idioma no está detectado aún.');
+    }
 }
 
 onMounted(() => {
