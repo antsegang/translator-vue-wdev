@@ -10,8 +10,8 @@
     },
     {
       "id": "1",
-      "name": "Anthony Bernal",
-      "lastname": "Segura Angulo",
+      "name": "Anthony",
+      "lastname": "Segura",
       "username": "Thony",
       "email": "anthonybsegura@vlacademy.com",
       "password": "12012000",
@@ -24,6 +24,14 @@
       "lastname": "Segura Angulo",
       "username": "bitzels",
       "email": "absegura12@gmail.com"
+    },
+    {
+      "id": "5615",
+      "name": "Anthony Bernal",
+      "lastname": "Segura Angulo",
+      "email": "absegura12@hotmail.com",
+      "password": "12012000",
+      "username": "Bitzels"
     }
   ]
 }

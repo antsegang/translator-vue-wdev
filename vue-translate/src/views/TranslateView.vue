@@ -33,8 +33,8 @@
                     <template #content>
                         <div class="mb-3">
                             <label for="" class="form-label"></label>
-                            <textarea class="form-control bg-transparent" name="resultado" id="resultado" rows="5"
-                                readonly></textarea>
+                            <textarea v-model="textTarget" class="form-control bg-transparent" name="resultado"
+                                id="resultado" rows="5" readonly></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Idioma</label>
@@ -61,6 +61,7 @@ import translateServices from '../services/translateServices';
 import { onBeforeMount, onMounted, ref } from 'vue';
 
 const textSource = ref('');
+const textTarget = ref('');
 const target = ref('en');
 const source = ref('es');
 const arrayLenguages = ref([]);
@@ -82,8 +83,10 @@ const detectLenguage = async () => {
 };
 
 const translate = async () => {
-    const response = await translateServices.translate(textSource.value, source.value, target.value);
-    console.log(response);
+    const response = await translateServices.translate(textSource.value, target.value, source.value);
+    const translations = response.data.data.translations[0].translatedText;
+    console.log(translations)
+    textTarget.value = translations;
 };
 
 const changeLenguageSource = (event) => {
